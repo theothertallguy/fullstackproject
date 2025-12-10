@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>BASEW Sales Prediction</title>
+</head>
+<body>
+  <div style="display:flex; justify-content:space-between; align-items:center;">
+    <h2>BASEW Total Sales Predictor</h2>
+    <a href="{{ url_for('logout') }}">Logout</a>
+  </div>
+
+  {% with messages = get_flashed_messages() %}
+    {% if messages %}
+      <ul style="color:red;">
+        {% for msg in messages %}
+          <li>{{ msg }}</li>
+        {% endfor %}
+      </ul>
+    {% endif %}
+  {% endwith %}
+
+  <form method="post" action="{{ url_for('predict') }}">
+    <label for="B">B:</label>
+    <input type="number" step="any" name="B" id="B" required><br><br>
+
+    <label for="A">A:</label>
+    <input type="number" step="any" name="A" id="A" required><br><br>
+
+    <label for="S">S:</label>
+    <input type="number" step="any" name="S" id="S" required><br><br>
+
+    <label for="E">E:</label>
+    <input type="number" step="any" name="E" id="E" required><br><br>
+
+    <label for="W">W:</label>
+    <input type="number" step="any" name="W" id="W" required><br><br>
+
+    <button type="submit">Predict Total Sales</button>
+  </form>
+</body>
+</html>
