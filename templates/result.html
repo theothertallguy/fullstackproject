@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>BASEW Sales Prediction</title>
+</head>
+<body>
+  <div style="margin-left: auto; margin-right: auto; max-width: fit-content; padding: 10px; text-align: center;">
+    <section>
+      <p style="font-size: 60px; font-style: italic; font-weight: bold; font-family: 'Times New Roman', Times, serif; margin-top:0px; margin-bottom:5px;">
+        ProPredict&#8482;
+      </p>
+    </section>
+    <section>
+      <p style="font-size: 30px; font-style: italic; font-family: 'Times New Roman', Times, serif; margin-top:0px; margin-bottom:5px;">
+        Price Prediction Software
+      </p>
+    </section>
+
+    {{ err }}
+
+    <!-- Forecast results -->
+    <p>
+      Forecast for <strong>{{ stock_code }}</strong> ({{ horizon }}): <strong>{{ total_forecast }}</strong><br>
+      {% if baseline %}Baseline: {{ baseline }}<br>{% endif %}
+      {% if recommendation %}Recommendation: {{ recommendation }}{% endif %}
+    </p>
+
+    <!-- Optional table of daily forecasts -->
+    {% if forecast_points %}
+      <table border="1" style="margin:auto; margin-top:20px;">
+        <tr>
+          <th>Date</th>
+          <th>Predicted Daily Sales</th>
+        </tr>
+        {% for point in forecast_points %}
+          <tr>
+            <td>{{ point['Date'].strftime('%Y-%m-%d') }}</td>
+            <td>{{ point['PredictedDailySales'] }}</td>
+          </tr>
+        {% endfor %}
+      </table>
+    {% endif %}
+  </div>
+</body>
+</html>

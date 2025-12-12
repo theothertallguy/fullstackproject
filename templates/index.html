@@ -1,42 +1,62 @@
 <!doctype html>
 <html lang="en">
+
 <head>
   <meta charset="utf-8">
   <title>BASEW Sales Prediction</title>
 </head>
+
 <body>
-  <div style="display:flex; justify-content:space-between; align-items:center;">
-    <h2>BASEW Total Sales Predictor</h2>
-    <a href="{{ url_for('logout') }}">Logout</a>
+  <div style="margin-left: auto; margin-right: auto; align-items:center;  max-width: fit-content; padding: 10px;">
+    <section>
+      <p style="font-size: 60px; font-style: italic; font-weight: bold; font-family: 'Times New Roman', Times, serif; margin-top:0px; margin-bottom:5px;">ProPredict&#8482;</p>
+    </section>
+    <section>
+      <p style="font-size: 30px; font-style: italic; font-family: 'Times New Roman', Times, serif; margin-top:0px; margin-bottom:5px;">Price Prediction Software</p>
+    </section>
   </div>
+  <div
+    style="margin-left: auto; margin-right: auto; align-items:center;  max-width: fit-content; border-width: 5px; border-style: solid; padding: 10px;">
+    <h2 style="margin-top:0px; margin-bottom:5px;">Total Sales Predictor</h2>
 
-  {% with messages = get_flashed_messages() %}
-    {% if messages %}
-      <ul style="color:red;">
-        {% for msg in messages %}
-          <li>{{ msg }}</li>
-        {% endfor %}
-      </ul>
-    {% endif %}
-  {% endwith %}
+    <form method="post" action="{{ url_for('predict') }}">
+      <label for="stock_code">Stock Code:</label>
+      <input type="text" name="stock_code" id="stock_code" required><br><br>
+      
+      <label for="horizon">Horizon:</label>
+      <select name="horizon" id="horizon">
+        <option value="week">Week</option>
+        <option value="month">Month</option>
+        <option value="year">Year</option>
+      </select>
 
-  <form method="post" action="{{ url_for('predict') }}">
-    <label for="B">B:</label>
-    <input type="number" step="any" name="B" id="B" required><br><br>
+      <button type="submit">Predict Total Sales</button>
+      <!--TODO spiffy up look and feel of two input fields-->
+      <!--TODO add dropdown to autocomplete stock code with db data-->
+      <!--TODO make dynamic date by week calculator-->
+      <!--TODO make dynamic product code display with product name search-->
 
-    <label for="A">A:</label>
-    <input type="number" step="any" name="A" id="A" required><br><br>
 
-    <label for="S">S:</label>
-    <input type="number" step="any" name="S" id="S" required><br><br>
+      <!--TODO get these done and feel accomplished-->
 
-    <label for="E">E:</label>
-    <input type="number" step="any" name="E" id="E" required><br><br>
+    </form>
 
-    <label for="W">W:</label>
-    <input type="number" step="any" name="W" id="W" required><br><br>
+  </div>
+  
+<div style="margin-left: auto; margin-right: auto; max-width: fit-content; padding: 10px; text-align: center;">
+  <section>
+    <p>Recommended Stock Codes</p>
+  </section>
+  <table style="border-collapse: collapse; margin: 0 auto; text-align: center; font-family: 'Times New Roman', Times, serif;">
+    {% for i in range(0, sample_codes|length, 3) %}
+      <tr>
+        <td style="border: 5px solid black; width: 100px; height: 40px;">{{ sample_codes[i] }}</td>
+        <td style="border: 5px solid black; width: 100px; height: 40px;">{{ sample_codes[i+1] if i+1 < sample_codes|length else '' }}</td>
+        <td style="border: 5px solid black; width: 100px; height: 40px;">{{ sample_codes[i+2] if i+2 < sample_codes|length else '' }}</td>
+      </tr>
+    {% endfor %}
+  </table>
+</div>
+  </body>
 
-    <button type="submit">Predict Total Sales</button>
-  </form>
-</body>
 </html>
