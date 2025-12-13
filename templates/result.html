@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>BASEW Sales Prediction</title>
+  <title>ProPredict Sales Predictor</title>
 </head>
 <body>
   <div style="margin-left: auto; margin-right: auto; max-width: fit-content; padding: 10px; text-align: center;">
@@ -21,8 +21,8 @@
 
     <!-- Forecast results -->
     <p>
-      Forecast for <strong>{{ stock_code }}</strong> ({{ horizon }}): <strong>{{ total_forecast }}</strong><br>
-      {% if baseline %}Baseline: {{ baseline }}<br>{% endif %}
+      Forecast for <strong>{{ stock_code }}</strong> ({{ horizon }}): <strong>${{ total_forecast }}</strong><br>
+      {% if baseline %}Baseline: ${{ baseline }}<br>{% endif %}
       {% if recommendation %}Recommendation: {{ recommendation }}{% endif %}
     </p>
 
@@ -36,7 +36,7 @@
         {% for point in forecast_points %}
           <tr>
             <td>{{ point['Date'].strftime('%Y-%m-%d') }}</td>
-            <td>{{ point['PredictedDailySales'] }}</td>
+            <td>${{ point['PredictedDailySales'] }}</td>
           </tr>
         {% endfor %}
       </table>
